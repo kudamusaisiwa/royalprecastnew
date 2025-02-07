@@ -200,7 +200,7 @@ const InvoicePDF: React.FC<InvoicePDFProps> = ({ order }) => {
         <View style={styles.header}>
           <View style={styles.leftColumn}>
             <Image src={LOGO_URL} style={styles.logo} />
-            <Text style={styles.companyName}>Rocktex Investment T/A Royal Precast</Text>
+            <Text style={styles.companyName}>Rocktex Investments T/A Royal Precast</Text>
             <Text style={styles.companyInfo}>1 Seke Rd, Corner Seke and George Rd</Text>
             <Text style={styles.companyInfo}>Harare</Text>
             <Text style={styles.companyInfo}>VOIP: 0864427939</Text>
