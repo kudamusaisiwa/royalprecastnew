@@ -255,9 +255,9 @@ export default function SalesLeaderboard() {
     // Calculate conversion rates and weighted scores, then sort
     const stats = Object.values(statsByUser)
       .map(stat => {
-        // Calculate conversion rate
-        const conversionRate = stat.totalRevenue > 0 
-          ? (stat.paidRevenue / stat.totalRevenue) * 100 
+        // Calculate conversion rate (paid orders to new orders)
+        const conversionRate = stat.newOrders > 0 
+          ? (stat.paidOrders / stat.newOrders) * 100 
           : 0;
 
         // Calculate weighted score:
@@ -278,8 +278,8 @@ export default function SalesLeaderboard() {
       .sort((a, b) => (b.weightedScore || 0) - (a.weightedScore || 0));
 
     // Calculate conversion ratio for unattributed sales
-    unattributedStats.conversionRate = unattributedStats.totalRevenue > 0 
-      ? (unattributedStats.paidRevenue / unattributedStats.totalRevenue) * 100 
+    unattributedStats.conversionRate = unattributedStats.newOrders > 0 
+      ? (unattributedStats.paidOrders / unattributedStats.newOrders) * 100 
       : 0;
 
     // Calculate weighted score for unattributed sales using same weights
