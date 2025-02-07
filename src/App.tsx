@@ -31,7 +31,8 @@ import Help from '@/pages/Help';
 import Chat from '@/pages/Chat';
 import SiteVisits from '@/pages/SiteVisits';
 import PrivateRoute from '@/components/auth/PrivateRoute';
-import Toast from '@/components/ui/Toast';
+import { Toaster } from "@/components/ui/toaster";
+import LegacyToast from "@/components/ui/LegacyToast";
 import Deliveries from '@/pages/Deliveries';
 import DeliveryHistory from '@/pages/DeliveryHistory';
 import Collections from '@/pages/Collections';
@@ -39,8 +40,6 @@ import Tasks from '@/pages/Tasks';
 import TrackOrder from '@/pages/TrackOrder';
 import Settings from '@/pages/Settings';
 import CustomerFeedback from '@/pages/CustomerFeedback';
-import { Toaster } from "@/components/ui/toaster";
-import { ToastProvider } from "@/components/ui/toast";
 
 // Error boundary component
 class ErrorBoundary extends React.Component<
