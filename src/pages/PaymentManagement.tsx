@@ -7,10 +7,10 @@ import { CreditCard, Search, User, ShoppingCart } from 'lucide-react';
 import type { Order, PaymentMethod, OperationalStatus } from '../types';
 import PaymentMethodModal from '../components/modals/PaymentMethodModal';
 import Pagination from '../components/ui/Pagination';
-import Toast from '../components/ui/Toast';
+import LegacyToast from '../components/ui/LegacyToast';
 import { useToast } from "@/components/ui/use-toast";
 import { formatPrice } from '@/lib/utils';
-import { Badge } from "../components/ui/Badge";
+import { Badge } from "../components/ui/badge";
 
 const getStatusBadgeVariant = (status: OperationalStatus) => {
   switch (status) {

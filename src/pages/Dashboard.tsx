@@ -14,7 +14,7 @@ import { useTaskStore } from '../store/taskStore';
 import StatCard from '../components/dashboard/StatCard';
 import SalesLeaderboard from '../components/dashboard/SalesLeaderboard';
 import DateRangePicker from '../components/DateRangePicker';
-import Toast from '../components/ui/Toast';
+import LegacyToast from '../components/ui/LegacyToast';
 import { TasksOverview } from "@/components/dashboard/TasksOverview";
 import { LinkedItemsOverview } from "@/components/dashboard/LinkedItemsOverview";
 
@@ -112,9 +112,8 @@ export default function Dashboard() {
   if (error) {
     return (
       <div className="p-4">
-        <Toast 
+        <LegacyToast 
           type="error"
-          title="Error"
           message={error}
           onClose={() => setError(null)}
         />
