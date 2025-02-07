@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useMemo } from 'react';
+import { Link } from 'react-router-dom';
 import { useOrderStore } from '../store/orderStore';
 import { useCommunicationStore } from '../store/communicationStore';
 import { useCustomerStore } from '../store/customerStore';
@@ -20,6 +21,7 @@ type FeedbackItem = {
   createdBy: string;
   createdById: string;
   customerName: string;
+  customerId: string;
   orderId?: string;
   communicationType?: string;
 };
@@ -59,6 +61,7 @@ export default function CustomerFeedback() {
                 createdBy: getUserById(note.createdBy)?.name || 'Unknown User',
                 createdById: note.createdBy,
                 customerName: customer ? `${customer.firstName} ${customer.lastName}` : 'Unknown Customer',
+                customerId: order.customerId,
                 orderId: order.id
               });
             }
@@ -85,6 +88,7 @@ export default function CustomerFeedback() {
               createdBy: getUserById(comm.createdBy)?.name || 'Unknown User',
               createdById: comm.createdBy,
               customerName: customer ? `${customer.firstName} ${customer.lastName}` : 'Unknown Customer',
+              customerId: comm.customerId,
               communicationType: comm.type
             });
           }
@@ -255,18 +259,24 @@ export default function CustomerFeedback() {
                 ) : (
                   <StickyNote className="h-5 w-5 text-yellow-500" />
                 )}
-                <span className="text-sm font-medium text-gray-900 dark:text-white">
+                <Link 
+                  to={`/customers/${item.customerId}`}
+                  className="text-sm font-medium text-gray-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                >
                   {item.customerName}
-                </span>
+                </Link>
                 {item.communicationType && (
                   <span className="text-xs bg-blue-100 dark:bg-blue-900/50 text-blue-800 dark:text-blue-300 px-2 py-1 rounded-full">
                     {item.communicationType}
                   </span>
                 )}
                 {item.orderId && (
-                  <span className="text-xs bg-yellow-100 dark:bg-yellow-900/50 text-yellow-800 dark:text-yellow-300 px-2 py-1 rounded-full">
+                  <Link
+                    to={`/orders/${item.orderId}`}
+                    className="text-xs bg-yellow-100 dark:bg-yellow-900/50 text-yellow-800 dark:text-yellow-300 hover:bg-yellow-200 dark:hover:bg-yellow-900/70 px-2 py-1 rounded-full transition-colors"
+                  >
                     Order #{item.orderId}
-                  </span>
+                  </Link>
                 )}
               </div>
               <div className="flex items-center text-sm text-gray-500 dark:text-gray-400">
