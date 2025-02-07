@@ -1,0 +1,148 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+
+    --primary: 222.2 47.4% 11.2%;
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 222.2 84% 4.9%;
+
+    --radius: 0.5rem;
+
+    --avatar-0: #1e40af;  /* blue-800 */
+    --avatar-1: #991b1b;  /* red-800 */
+    --avatar-2: #166534;  /* green-800 */
+    --avatar-3: #6b21a8;  /* purple-800 */
+    --avatar-4: #9d174d;  /* pink-800 */
+    --avatar-5: #3730a3;  /* indigo-800 */
+    --avatar-6: #9a3412;  /* orange-800 */
+    --avatar-7: #115e59;  /* teal-800 */
+    --avatar-8: #155e75;  /* cyan-800 */
+    --avatar-9: #1e293b;  /* slate-800 */
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+
+    --avatar-0: #2563eb;  /* blue-600 */
+    --avatar-1: #dc2626;  /* red-600 */
+    --avatar-2: #16a34a;  /* green-600 */
+    --avatar-3: #9333ea;  /* purple-600 */
+    --avatar-4: #db2777;  /* pink-600 */
+    --avatar-5: #4f46e5;  /* indigo-600 */
+    --avatar-6: #ea580c;  /* orange-600 */
+    --avatar-7: #0d9488;  /* teal-600 */
+    --avatar-8: #0891b2;  /* cyan-600 */
+    --avatar-9: #475569;  /* slate-600 */
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+@layer components {
+  .modern-input {
+    @apply w-full px-6 py-4 text-lg rounded-lg border-gray-300 dark:border-gray-600 shadow-sm
+    focus:border-blue-500 focus:ring-blue-500 focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-gray-900
+    placeholder:text-gray-400 dark:placeholder:text-gray-500 transition-all duration-200
+    bg-white dark:bg-gray-700 text-gray-900 dark:text-white;
+  }
+
+  .modern-select {
+    @apply px-3 py-1.5 text-sm rounded-lg border-gray-300 dark:border-gray-600 shadow-sm
+    focus:border-blue-500 focus:ring-blue-500 focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-gray-900
+    transition-all duration-200
+    bg-white dark:bg-gray-700 text-gray-900 dark:text-white;
+    -webkit-appearance: menulist;
+    appearance: menulist;
+  }
+
+  .modern-select option {
+    @apply py-1 px-2;
+    display: block;
+    white-space: nowrap;
+  }
+
+  .modern-textarea {
+    @apply w-full px-6 py-4 text-lg rounded-lg border-gray-300 dark:border-gray-600 shadow-sm
+    focus:border-blue-500 focus:ring-blue-500 focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-gray-900
+    placeholder:text-gray-400 dark:placeholder:text-gray-500 transition-all duration-200 min-h-[120px]
+    bg-white dark:bg-gray-700 text-gray-900 dark:text-white;
+  }
+
+  .search-input {
+    @apply w-full pl-14 pr-6 py-4 text-lg rounded-lg border-gray-300 dark:border-gray-600 shadow-sm
+    focus:border-blue-500 focus:ring-blue-500 focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-gray-900
+    placeholder:text-gray-400 dark:placeholder:text-gray-500 transition-all duration-200
+    bg-white dark:bg-gray-700 text-gray-900 dark:text-white;
+  }
+
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+}

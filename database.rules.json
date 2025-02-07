@@ -1,0 +1,47 @@
+{
+  "rules": {
+    "messages": {
+      ".read": "auth != null",
+      ".write": "auth != null",
+      "$messageId": {
+        ".validate": "newData.hasChildren(['text', 'userId', 'userName', 'timestamp'])",
+        "text": {
+          ".validate": "newData.isString() && newData.val().length > 0 && newData.val().length <= 1000"
+        },
+        "userId": {
+          ".validate": "newData.isString()"
+        },
+        "userName": {
+          ".validate": "newData.isString()"
+        },
+        "timestamp": {
+          ".validate": "newData.val() <= now"
+        },
+        "deleted": {
+          ".validate": "newData.isBoolean()"
+        },
+        "deletedAt": {
+          ".validate": "newData.val() <= now"
+        },
+        "mentions": {
+          ".validate": "!newData.exists() || newData.hasChildren()",
+          "$userId": {
+            ".validate": "newData.isString()"
+          }
+        },
+        "attachment": {
+          ".validate": "!newData.exists() || (newData.hasChildren(['type', 'id', 'title']))",
+          "type": {
+            ".validate": "newData.isString()"
+          },
+          "id": {
+            ".validate": "newData.isString()"
+          },
+          "title": {
+            ".validate": "newData.isString()"
+          }
+        }
+      }
+    }
+  }
+}

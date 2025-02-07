@@ -1,0 +1,54 @@
+
+src/components/ui/Toast.tsx
+src/components/ui/Pagination.tsx
+src/components/ThemeToggle.tsx
+All authentication-related files:
+
+src/components/auth/PrivateRoute.tsx
+src/components/auth/OTPVerification.tsx
+All order-related files:
+
+src/components/orders/*
+src/pages/Orders.tsx
+src/pages/OrderDetails.tsx
+src/store/orderStore.ts
+All product-related files:
+
+src/components/products/*
+src/pages/Products.tsx
+src/store/productStore.ts
+All delivery-related files:
+
+src/components/delivery/*
+src/pages/DeliveryCalendar.tsx
+src/store/deliveryStore.ts
+All payment-related files:
+
+src/components/modals/PaymentMethodModal.tsx
+src/store/paymentStore.ts
+All dashboard components:
+
+src/components/dashboard/*
+src/pages/Dashboard.tsx
+All activity-related files:
+
+src/components/activities/*
+src/pages/Activities.tsx
+src/store/activityStore.ts
+Configuration files:
+
+vite.config.ts
+tailwind.config.js
+tsconfig.json
+package.json
+netlify.toml
+
+
+ src/utils/audio.ts
+ src/utils/buildTracking.ts
+ src/utils/dateRange.ts
+ src/pages/CustomerDetails.tsx
+ src/components/customers/*
+ src/store/customerStore.ts
+ src/lib/firebase.ts (to add email functionality)
+ src/types/index.ts 
