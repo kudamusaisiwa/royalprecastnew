@@ -4,7 +4,9 @@ import { useOrderStore } from '../store/orderStore';
 import { useCommunicationStore } from '../store/communicationStore';
 import { useCustomerStore } from '../store/customerStore';
 import { useUserStore } from '../store/userStore';
-import { MessageCircle, StickyNote, Clock, User, Filter, X } from 'lucide-react';
+import { MessageCircle, StickyNote, Clock, User, Filter, X, BarChart2 } from 'lucide-react';
+import { analyzeSentiment } from '../services/openaiService';
+import SentimentAnalysisModal from '../components/modals/SentimentAnalysisModal';
 import { formatDistanceToNow, isWithinInterval, startOfDay, endOfDay } from 'date-fns';
 import { DateRange } from 'react-day-picker';
 import { Calendar } from '@/components/ui/calendar';
@@ -32,6 +34,9 @@ export default function CustomerFeedback() {
   const [loading, setLoading] = useState(true);
   const [dateRange, setDateRange] = useState<DateRange | undefined>();
   const [selectedUser, setSelectedUser] = useState<string>('');
+  const [isAnalyzing, setIsAnalyzing] = useState(false);
+  const [analysisResult, setAnalysisResult] = useState<string>('');
+  const [showAnalysisModal, setShowAnalysisModal] = useState(false);
   
   const { orders } = useOrderStore();
   const { communications } = useCommunicationStore();
@@ -167,9 +172,40 @@ export default function CustomerFeedback() {
   return (
     <div className="p-6">
       <div className="flex flex-col md:flex-row md:items-center justify-between mb-6">
-        <h1 className="text-2xl font-semibold text-gray-900 dark:text-white mb-4 md:mb-0">
-          Customer Feedback
-        </h1>
+        <div className="flex items-center space-x-4">
+          <h1 className="text-2xl font-semibold text-gray-900 dark:text-white">
+            Customer Feedback
+          </h1>
+          <Button
+            variant="outline"
+            size="sm"
+            className="flex items-center space-x-2"
+            onClick={async () => {
+              try {
+                setIsAnalyzing(true);
+                setShowAnalysisModal(true);
+                
+                // Format feedback data
+                const feedbackData = filteredItems
+                  .map(item => `${item.customerName} - ${item.type === 'note' ? 'Note' : item.communicationType} - ${item.orderId ? `Order #${item.orderId}` : 'No Order'}: ${item.content}`)
+                  .join('\n');
+                
+                // Get analysis
+                const analysis = await analyzeSentiment(feedbackData);
+                setAnalysisResult(analysis);
+              } catch (error) {
+                console.error('Error analyzing sentiment:', error);
+                setAnalysisResult('Failed to analyze sentiment. Please try again.');
+              } finally {
+                setIsAnalyzing(false);
+              }
+            }}
+            disabled={isAnalyzing || filteredItems.length === 0}
+          >
+            <BarChart2 className="h-4 w-4" />
+            <span>Analyse Sentiment</span>
+          </Button>
+        </div>
 
         <div className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-4">
           {/* Date Range Picker */}
@@ -299,6 +335,13 @@ export default function CustomerFeedback() {
             No feedback items found
           </div>
         )}
+
+        <SentimentAnalysisModal
+          isOpen={showAnalysisModal}
+          onClose={() => setShowAnalysisModal(false)}
+          analysis={analysisResult}
+          loading={isAnalyzing}
+        />
       </div>
     </div>
   );
