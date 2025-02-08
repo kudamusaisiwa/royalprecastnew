@@ -9,11 +9,11 @@ import { analyzeSentiment } from '../services/openaiService';
 import SentimentAnalysisModal from '../components/modals/SentimentAnalysisModal';
 import { formatDistanceToNow, isWithinInterval, startOfDay, endOfDay } from 'date-fns';
 import { DateRange } from 'react-day-picker';
-import { Calendar } from '@/components/ui/calendar';
-import { Button } from '@/components/ui/button';
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { cn } from '@/lib/utils';
+import { Calendar } from '../components/ui/calendar';
+import { Button } from '../components/ui/button';
+import { Popover, PopoverContent, PopoverTrigger } from '../components/ui/popover';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../components/ui/select';
+import { cn } from '../lib/utils';
 
 type FeedbackItem = {
   id: string;
