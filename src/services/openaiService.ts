@@ -1,9 +1,6 @@
 import OpenAI from 'openai';
 
-const apiKey = import.meta.env.VITE_OPENAI_API_KEY;
-if (!apiKey) {
-  throw new Error('OpenAI API key is missing. Please add VITE_OPENAI_API_KEY to your .env file.');
-}
+const apiKey = 'hsk-proj-92RgFeDSO9xhAusYnIJjUAlI5IHitEktOGiWo41T398bxMJb4BCEQJiR6TbMxm-UDvqR9J57l2T3BlbkFJTicCo-q2ygPtAQza-cIVrZfZIfhNUCf9DPx0PniUIqqc-9x2jng9meGbz5JZHU8a_4Rfpp-e4A';
 
 const openai = new OpenAI({
   apiKey,
