@@ -181,24 +181,18 @@ export default function CustomerFeedback() {
             size="sm"
             className="flex items-center space-x-2"
             onClick={async () => {
-              try {
-                setIsAnalyzing(true);
-                setShowAnalysisModal(true);
-                
-                // Format feedback data
-                const feedbackData = filteredItems
-                  .map(item => `${item.customerName} - ${item.type === 'note' ? 'Note' : item.communicationType} - ${item.orderId ? `Order #${item.orderId}` : 'No Order'}: ${item.content}`)
-                  .join('\n');
-                
-                // Get analysis
-                const analysis = await analyzeSentiment(feedbackData);
-                setAnalysisResult(analysis);
-              } catch (error) {
-                console.error('Error analyzing sentiment:', error);
-                setAnalysisResult('Failed to analyze sentiment. Please try again.');
-              } finally {
-                setIsAnalyzing(false);
-              }
+              setIsAnalyzing(true);
+              setShowAnalysisModal(true);
+              
+              // Format feedback data
+              const feedbackData = filteredItems
+                .map(item => `${item.customerName} - ${item.type === 'note' ? 'Note' : item.communicationType} - ${item.orderId ? `Order #${item.orderId}` : 'No Order'}: ${item.content}`)
+                .join('\n');
+              
+              // Get analysis
+              const analysis = await analyzeSentiment(feedbackData);
+              setAnalysisResult(analysis);
+              setIsAnalyzing(false);
             }}
             disabled={isAnalyzing || filteredItems.length === 0}
           >

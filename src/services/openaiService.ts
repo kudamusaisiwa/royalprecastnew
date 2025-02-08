@@ -1,6 +1,9 @@
 import OpenAI from 'openai';
 
-const apiKey = 'hsk-proj-92RgFeDSO9xhAusYnIJjUAlI5IHitEktOGiWo41T398bxMJb4BCEQJiR6TbMxm-UDvqR9J57l2T3BlbkFJTicCo-q2ygPtAQza-cIVrZfZIfhNUCf9DPx0PniUIqqc-9x2jng9meGbz5JZHU8a_4Rfpp-e4A';
+const apiKey = import.meta.env.VITE_OPENAI_API_KEY;
+if (!apiKey) {
+  console.error('OpenAI API key is missing. Please add VITE_OPENAI_API_KEY to your .env file.');
+}
 
 const openai = new OpenAI({
   apiKey,
@@ -16,6 +19,10 @@ When provided with data (e.g., call logs with customer names, order numbers, and
 - Highlight actionable insights and recommendations
 - Use clear headings, bullet points, and a friendly tone`;
 
+  if (!apiKey) {
+    return 'OpenAI API key is missing. Please configure it in the environment settings.';
+  }
+
   try {
     const completion = await openai.chat.completions.create({
       messages: [
@@ -30,6 +37,9 @@ When provided with data (e.g., call logs with customer names, order numbers, and
     return completion.choices[0]?.message?.content || 'No analysis generated';
   } catch (error) {
     console.error('Error analyzing sentiment:', error);
-    throw new Error('Failed to analyze sentiment');
+    if (error.message.includes('401')) {
+      return 'Invalid API key. Please check your OpenAI API key configuration.';
+    }
+    return 'Failed to analyze sentiment. Please try again later.';
   }
 }
